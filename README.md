@@ -4,7 +4,7 @@ Das nachfolgende BPMN Tutorial basiert auf dem Blog Eintrag [Use Camunda without
 
 ## Installation
 
-Es wird folgende Software benögtigt:
+Es wird folgende Software benötigt:
 
 * Java
 * [Camunda Modeler](https://camunda.org/download/modeler/)
