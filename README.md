@@ -48,7 +48,7 @@ BPMN Prozess mittels [REST](https://de.wikipedia.org/wiki/Representational_State
 	
 	curl -w "\n" \
 	-H "Accept: application/json" \
-	-F "deployment-name=trip" \
+	-F "deployment-name=rechnung" \
 	-F "enable-duplicate-filtering=true" \
 	-F "deploy-changed-only=true" \
 	-F "Rechnung_1.bpmn=@Rechnung_1.bpmn" \
@@ -56,9 +56,35 @@ BPMN Prozess mittels [REST](https://de.wikipedia.org/wiki/Representational_State
 
 Auf "Tasklist" (rechts oben) wechseln und mittels "Start process" den Rechnung Prozess starten. Beim User Demo sollte unter "My Tasks" die Task "Rechnung erfassen" erscheinen.
 
+## Schritt 3 - Prozess mittels Service Task und REST automatisieren
+
+![](images/ServiceTask.png)
+
+Im nächsten Schritt wird die User Task "Rechnung zahlen" durch eine Service Task mit REST Aufruf automatisiert.
+
+Dazu brauchen wir ein Backend, z.B. in [NodeJS](https://nodejs.org/en/), siehe Beispiel [mainStep3.js](mainStep3.js).
+
+Anschliessend ist der BPM Prozess, wie oben, zu erweitern.
+
+Im Camunda Modeler
+* Task "Rechnung zahlen" mittels "Schraubenschlüssel" auf Service Task ändern.
+* Implementation auf Connector ändern
+* Auf dem Connector Tab: Connector Id: `http-connector`, Input/Output Felder
+	* `url` = URL Backend
+	* `method` = HTTP Methode, hier POST
+	* `headers` = HTTP Header insbesondere das Format `application/json` eintragen
+	* `payload` = Die zu übertragende Felder im JSON Format: `{ "rnr": "${rnr}", "rdatum": "${rdatum}", "rbetrag": "${rbetrag}" }`
+eintragen und via `curl` veröffentlichen.
+
+[mainStep3.js](mainStep3.js) starten und Prozess in [BPM platform](https://camunda.org/download/) ausführen.
+
+Ein angepasster BPM Prozess ist in [RechnungStep3.bpmn](RechnungStep3.bpmn) zu finden.
 
 
- 
+
+
+
+
    
    
    
