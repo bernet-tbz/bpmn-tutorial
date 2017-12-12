@@ -51,8 +51,10 @@ BPMN Prozess mittels [REST](https://de.wikipedia.org/wiki/Representational_State
 	-F "deployment-name=trip" \
 	-F "enable-duplicate-filtering=true" \
 	-F "deploy-changed-only=true" \
-	-F "Rechnung_1.bpmn=@Rechnung_1.bpmn" \
+	-F "Rechnung.bpmn=@Rechnung.bpmn" \
 	http://localhost:8080/engine-rest/deployment/create
+
+Beim Parameter hinter @ handelt es sich um einen Dateinamen, welche ggf. anzupassen ist.
 
 Auf "Tasklist" (rechts oben) wechseln und mittels "Start process" den Rechnung Prozess starten. Beim User Demo sollte unter "My Tasks" die Task "Rechnung erfassen" erscheinen.
 
