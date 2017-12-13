@@ -84,10 +84,17 @@ eintragen und via `curl` veröffentlichen.
 
 Ein angepasster BPM Prozess ist in [RechnungStep3.bpmn](RechnungStep3.bpmn) zu finden.
 
+## Schritt 4 - Prozess automatisch via REST starten
 
+Nachdem [RechnungStep3.bpmn](RechnungStep3.bpmn) veröffentlicht wurde, kann der Prozess mittels `curl` gestartet werden.
 
+	curl \
+	-H "Content-Type: application/json" \
+	-X POST \
+	-d '{ "variables": { "rnr": {"value": "123", "type": "long"}, "rdatum": {"value": "2017-12-27T00:00:00", "type": "date"}, "rbetrag": {"value": "200.00", "type": "String"} } }' \
+	http://localhost:8080/engine-rest/process-definition/key/RechnungStep3/start
 
-
+Als nächster Schritt kann ein HTML Formular erstellt werden, welche nach dem Ausfüllen der Felder den Prozess startet.
 
    
    
