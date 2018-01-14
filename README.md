@@ -80,7 +80,7 @@ eintragen und via `curl` veröffentlichen.
 
 [mainStep3.js](mainStep3.js), mittels `nodejs mainStep3.js` starten und Prozess in [BPM platform](https://camunda.org/download/) ausführen. [mainStep3.js](mainStep3.js) kann mittels `curl` wie folgt getestet werden:
 
-	curl -H "Content-Type: application/json"-X  localhost:8080/rechnungZahlen -d '{ "rnr": "123", "rdatum": "28.11.17", "rbetrag": "200.00" }'
+	curl -H "Content-Type: application/json" -X POST localhost:8080/rechnungZahlen -d '{ "rnr": "123", "rdatum": "28.11.17", "rbetrag": "200.00" }'
 
 Ein angepasster BPM Prozess ist in [RechnungStep3.bpmn](RechnungStep3.bpmn) zu finden.
 
