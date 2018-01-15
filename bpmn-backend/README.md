@@ -22,7 +22,7 @@ Browser aufrufen und folgenden URL eingeben: [http://localhost:8090/myapp/applic
 	
 ### Javaklasse um BPMN Aufruf abzuhandeln
 
-In der Klasse [RechnungBackend](src/main/java/ch/tbz/bpmn/backend/RechnungBackend.java) wird der Aufruf aus dem BPMN Prozess abgehandelt.
+Um den BPMN Aufruf abzuhandeln ist das Beispiel um eine Klasse [RechnungBackend](src/main/java/ch/tbz/bpmn/backend/RechnungBackend.java) zu erweiteren.
 
 Die Klasse ist als REST Backend implementiert, welche einen HTTP POST mit den Feldern im JSON Format entgegennimmt.
 
