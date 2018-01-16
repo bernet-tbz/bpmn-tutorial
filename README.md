@@ -94,7 +94,7 @@ Nachdem [RechnungStep3.bpmn](RechnungStep3.bpmn) veröffentlicht wurde, kann der
 	-d '{ "variables": { "rnr": {"value": "123", "type": "long"}, "rdatum": {"value": "2017-12-27T00:00:00", "type": "date"}, "rbetrag": {"value": "200.00", "type": "String"} } }' \
 	http://localhost:8080/engine-rest/process-definition/key/RechnungStep3/start
 
-Als nächster Schritt kann ein HTML Formular erstellt werden, welche nach dem Ausfüllen der Felder den Prozess startet.
+Wie der Prozess mittels HTML5/JavaScript gestartet werden kann ist in [BPMN Frontend](bpmn-frontend/README.md) beschrieben.
 
    
    
