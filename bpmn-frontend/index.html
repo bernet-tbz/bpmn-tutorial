@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BPMN Frontend</title>
+<link rel="stylesheet" href="src/css/index.css">
+</head>
+<body>
+
+    <header class="bpmnapp-header">
+        <h1 id="title">BPMN Frontend</h1>
+        <h4>Rechnungsprozess starten!!!</h4>
+    </header>
+
+    <!-- <form action="http://localhost:8080/engine-rest/process-definition/key/RechnungStep3/start" method="POST" target="_blank"
+      enctype="application/json" >
+      
+  Rechnungs-Nr:<br>
+  <input type="text" name="rnr"><br>
+  Betrag:<br>
+  <input type="text" name="rbetrag">
+  
+  <input type="submit" value="Start">
+</form> -->
+
+    <section class="bpmnapp">
+
+        <form id="bpmn-form" class="new-bpmn">
+
+            <table>
+                <tr>
+                    <td>Rechnungs-Nr:</td>
+                    <td><input id="rnr" type="number" autofocus autocomplete="off" /></td>
+                </tr>
+                <tr>
+                    <td>Betrag:</td>
+                    <td><input id="rbetrag" type="number" autocomplete="off" />
+                    <button id="add-button" class="add-button">+</button></td>
+                </tr>
+            </table>
+        </form>
+
+        <div class="main">
+            <ul id="bpmn-list" class="bpmn-list">
+            </ul>
+        </div>
+    </section>
+    
+    <footer class="info">
+        <p>
+            JavaScript BPMN Frontend von <a href="https://github.com/bernet-tbz/bpmn-tutorial">BPMN Tutorial</a>
+        </p>
+    </footer>
+
+    <script src="src/modules/jquery.min.js"></script>
+    <script src="src/modules/fittextjs.js"></script>
+    <script src="src/app/base.js"></script>
+    <script src="src/app/app.js"></script>
+
+</body>
+</html>
