@@ -97,3 +97,42 @@ Testen mittels
 
 	mvn clean package
 	java -jar target/bpmn-service-1.0-SNAPSHOT-jar-with-dependencies.jar	
+	
+### Docker Image erstellen (optional)
+
+Um den Port 8090 ausserhalb des Containers sichtbar zu machen, in der Datei `ch.tbz.bpmn.backend.Main.java` die Konstante `BASE_URI` anpassen.
+
+    // Base URI the Grizzly HTTP server will listen on
+    public static final String BASE_URI = "http://0.0.0.0:8090/myapp/";
+
+.JAR Datei wie oben beschrieben erstellen.
+
+`Dockerfile` mit folgendem Inhalt erstellen:
+
+	FROM java:8
+	COPY target/bpmn-service-1.0-SNAPSHOT-jar-with-dependencies.jar /opt/bpmn-service.jar
+	EXPOSE 8090
+	CMD java -jar /opt/bpmn-service.jar
+	
+Docker Image builden:
+
+	docker build -t bpmn-backend .
+
+Docker Image als Container starten:
+
+	docker run --rm -p 8090:8090 --name bpmn -it bpmn-backend
+
+### Kubernetes (optional)
+
+Docker Image wie oben erstellen.
+
+`bpmn-backend.yaml` mit Service und Deployment erstellen. `replicas` festlegen, z.B. 3.
+
+	kubectl create -f bpmn-backend.yaml
+
+Testen mittels
+
+	minikube service bpmn-backend
+
+Um die Service Beschreibung (REST-Service) zu sehen ist dem URL `/myapp/application.wadl` hinten an zu stellen.
+
