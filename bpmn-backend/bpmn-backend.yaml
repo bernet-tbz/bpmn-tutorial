@@ -32,7 +32,7 @@ spec:
     spec:
       containers:        
       - name: bpmn-backend
-        image: bpmn-backend
+        image: misegr/bpmn-backend
         imagePullPolicy: IfNotPresent        
         ports:
         - containerPort: 8090
