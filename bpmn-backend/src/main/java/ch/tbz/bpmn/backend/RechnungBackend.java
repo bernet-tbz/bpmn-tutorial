@@ -40,7 +40,7 @@ public class RechnungBackend
     @Path( "zahlen/" )
     public Response zahlen( FormData data )
     {
-        System.out.println( "Rechnungs-Nr: " + data.rnr + ", Datum: " + data.rdatum + ", Betrag: " + data.rbetrag );
+        System.err.println( "Rechnungs-Nr: " + data.rnr + ", Datum: " + data.rdatum + ", Betrag: " + data.rbetrag );
         return  ( Response.status(  200 ).build() );
     }
 
