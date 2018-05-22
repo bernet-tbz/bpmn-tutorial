@@ -32,7 +32,7 @@ function addToDo()
             );
         rnr.val( '' );
         rbetrag.val( '' );
-        $.post( "https://192.168.60.100:30443/engine-rest/process-definition/key/RechnungStep3/start",
+        $.post( "https://localhost:30443/engine-rest/process-definition/key/RechnungStep3/start",
         		text );
     }
 }
