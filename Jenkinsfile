@@ -43,8 +43,8 @@ pipeline {
 		    	 }        	
             steps {
             		unstash 'jar'
-            		sh("cd bpmn-frontend/ && /usr/bin/docker build -t misegr/bpmn-frontend:${env.BRANCH_NAME} .")
-            		sh("cd bpmn-backend/  && /usr/bin/docker build -t misegr/bpmn-backend:${env.BRANCH_NAME} .")
+            		sh("cd bpmn-frontend/ && /usr/bin/docker build -t misegr/bpmn-frontend:${env.BRANCH_NAME}.${env.BUILD_NUMBER} .")
+            		sh("cd bpmn-backend/  && /usr/bin/docker build -t misegr/bpmn-backend:${env.BRANCH_NAME}.${env.BUILD_NUMBER} .")
                   }
         }
         stage('Deploy Branch Images') { 
@@ -55,7 +55,7 @@ pipeline {
 		    	}        	
             steps {
                     sh("git clone https://github.com/mc-b/misegr.git")     
-          			sh("sed -i 's#:latest#:${env.BRANCH_NAME}#' misegr/bpmn/*.yaml")
+          			sh("sed -i 's#latest#${env.BRANCH_NAME}.${env.BUILD_NUMBER}#' misegr/bpmn/*.yaml")
           			sh("kubectl apply -f misegr/bpmn")            
                   }
         }        
