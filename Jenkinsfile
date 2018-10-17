@@ -55,7 +55,7 @@ pipeline {
 		    	}        	
             steps {
                     sh("git clone https://github.com/mc-b/misegr.git")     
-          			sh("sed -i 's#:latest#${env.BRANCH_NAME}#' misegr/bpmn/*.yaml")
+          			sh("sed -i 's#:latest#:${env.BRANCH_NAME}#' misegr/bpmn/*.yaml")
           			sh("kubectl apply -f misegr/bpmn")            
                   }
         }        
