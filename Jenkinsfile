@@ -34,7 +34,7 @@ pipeline {
             		sh("kubectl apply -f misegr/bpmn")
                   }
         }
-        stage('Build Images') { 
+        stage('Build Branch Images') { 
         	agent any
 		    when { 
 		       		not { branch 'master' } 
@@ -46,7 +46,7 @@ pipeline {
             		sh("cd bpmn-backend/  && /usr/bin/docker build -t misegr/bpmn-backend:${env.BRANCH_NAME} .")
                   }
         }
-        stage('Deploy Images') { 
+        stage('Deploy Branch Images') { 
         	agent any
 		    when { 
 		       		not { branch 'master' } 
