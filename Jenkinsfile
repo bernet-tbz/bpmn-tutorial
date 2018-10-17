@@ -1,3 +1,7 @@
+def  appName = 'bpmn'
+def  feSvcName = "${appName}-frontend"
+def  imageTag = "misegr/${feSvcName}-frontend:${env.BRANCH_NAME}.${env.BUILD_NUMBER}"
+
 pipeline {
     agent none
     stages {
@@ -16,11 +20,42 @@ pipeline {
         }
         stage('Build Images') { 
         	agent any
+      		when { branch 'master' }        	
             steps {
             		unstash 'jar'
-            		sh 'cd bpmn-frontend/ && /usr/bin/docker build -t misegr/bpmn-frontend .'
-            		sh 'cd bpmn-backend/  && /usr/bin/docker build -t misegr/bpmn-backend .'
+            		sh("cd bpmn-frontend/ && /usr/bin/docker build -t misegr/bpmn-frontend .")
+            		sh("cd bpmn-backend/  && /usr/bin/docker build -t misegr/bpmn-backend .")
                   }
         }
+        stage('Deploy Images') { 
+        	agent any
+      		when { branch 'master' }        	
+            steps {
+            		sh("kubectl apply -f misegr/bpmn")
+                  }
+        }
+        stage('Build Images') { 
+        	agent any
+		    when { 
+		       		not { branch 'master' } 
+		       		not { branch 'canary' }
+		    	 }        	
+            steps {
+            		unstash 'jar'
+            		sh("cd bpmn-frontend/ && /usr/bin/docker build -t misegr/bpmn-frontend:${env.BRANCH_NAME} .")
+            		sh("cd bpmn-backend/  && /usr/bin/docker build -t misegr/bpmn-backend:${env.BRANCH_NAME} .")
+                  }
+        }
+        stage('Deploy Images') { 
+        	agent any
+		    when { 
+		       		not { branch 'master' } 
+		       		not { branch 'canary' }
+		    	}        	
+            steps {
+          			sh("sed -i 's#:latest#${env.BRANCH_NAME}#' misegr/bpmn/*.yaml")
+          			sh("kubectl apply -f misegr/bpmn")            
+                  }
+        }        
     }
 }
