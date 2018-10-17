@@ -31,6 +31,7 @@ pipeline {
         	agent any
       		when { branch 'master' }        	
             steps {
+                    sh("git clone https://github.com/mc-b/misegr.git")     
             		sh("kubectl apply -f misegr/bpmn")
                   }
         }
@@ -53,6 +54,7 @@ pipeline {
 		       		not { branch 'canary' }
 		    	}        	
             steps {
+                    sh("git clone https://github.com/mc-b/misegr.git")     
           			sh("sed -i 's#:latest#${env.BRANCH_NAME}#' misegr/bpmn/*.yaml")
           			sh("kubectl apply -f misegr/bpmn")            
                   }
